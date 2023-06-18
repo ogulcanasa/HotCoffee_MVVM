@@ -21,7 +21,6 @@ extension OrderListViewModel {
     }
 }
 
-
 struct OrderViewModel {
     let order: Order
 }

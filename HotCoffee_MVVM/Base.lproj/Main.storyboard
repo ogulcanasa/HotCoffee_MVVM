@@ -85,7 +85,7 @@
                                     <outlet property="delegate" destination="LgC-H6-VnX" id="Mec-sZ-LxM"/>
                                 </connections>
                             </tableView>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="px0-YN-uoB">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="px0-YN-uoB">
                                 <rect key="frame" x="96.666666666666686" y="626" width="200" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="BwH-jH-s9M"/>
@@ -94,7 +94,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yf1-Ft-fk7">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yf1-Ft-fk7">
                                 <rect key="frame" x="96.666666666666686" y="685" width="200" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Q8V-oy-lfS"/>
@@ -118,7 +118,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add New Order" id="gQ3-ag-fht">
-                        <barButtonItem key="leftBarButtonItem" title="Close" id="Kzx-eA-uXE"/>
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="Kzx-eA-uXE">
+                            <connections>
+                                <action selector="close" destination="LgC-H6-VnX" id="Nzd-iv-YcE"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="6Rz-Uo-BCC">
                             <connections>
                                 <action selector="save" destination="LgC-H6-VnX" id="rP9-TJ-9yO"/>

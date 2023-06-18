@@ -8,7 +8,14 @@
 import Foundation
 import UIKit
 
+protocol AddCoffeeOrderDelegate {
+    func addCoffeeOrderViewControllerDidSave(order: Order, controller: UIViewController)
+    func addCoffeeOrderViewControllerDidClose(controller: UIViewController)
+}
+
 class AddOrderViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    var delegate: AddCoffeeOrderDelegate?
 
     private var vm = AddCoffeeOrderViewModel()
     @IBOutlet weak var tableView: UITableView!
@@ -19,6 +26,7 @@ class AddOrderViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        coffeeSizeSegmentedControl.selectedSegmentTintColor = UIColor.systemBlue
     }
 
     func setupUI() {
@@ -49,6 +57,12 @@ class AddOrderViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.cellForRow(at: indexPath)?.accessoryType = .none
     }
 
+    @IBAction func close() {
+        if let delegate = delegate {
+            delegate.addCoffeeOrderViewControllerDidClose(controller: self)
+        }
+    }
+
     @IBAction func save() {
         let name = self.nameTextField.text
         let email = self.emailTextField.text
@@ -62,7 +76,21 @@ class AddOrderViewController: UIViewController, UITableViewDelegate, UITableView
         self.vm.name = name
         self.vm.email = email
         self.vm.selectedSize = selectedSize
-        self.vm.selectedType = self.vm.types[indexPath.row
-        ]
+        self.vm.selectedType = self.vm.types[indexPath.row]
+
+        WebService().load(resource: Order.create(vm: self.vm)) { result in
+
+            switch result {
+                case .success(let order):
+                    if let order = order, let delegate = self.delegate {
+                        DispatchQueue.main.async {
+                            delegate.addCoffeeOrderViewControllerDidSave(order: order, controller: self)
+                        }
+                    }
+                case .failure(let error):
+                    print(error)
+            }
+
+        }
     }
 }
